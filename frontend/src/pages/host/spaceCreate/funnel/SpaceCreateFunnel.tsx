@@ -1,3 +1,4 @@
+import { Activity } from 'react';
 import StepProgressBar from '../../../../components/@common/progressBar/step/StepProgressBar';
 import useConfirmBeforeRefresh from '../../../../hooks/@common/useConfirmBeforeRefresh';
 import useFormFunnel from '../../../../hooks/domain/funnel/useFormFunnel';
@@ -45,41 +46,37 @@ const SpaceCreateFunnel = () => {
       />
       <S.TopContainer></S.TopContainer>
       <S.ContentContainer>
-        <Funnel.Step name="name">
+        <Activity mode={Funnel.funnelStep === 'name' ? 'visible' : 'hidden'}>
           <SpaceNameElement
             onNext={(name) => Funnel.goNextWithData('accessType', { name })}
-            initialValue={Funnel.form.name}
           />
-        </Funnel.Step>
-        <Funnel.Step name="accessType">
+        </Activity>
+        <Activity
+          mode={Funnel.funnelStep === 'accessType' ? 'visible' : 'hidden'}
+        >
           <SpaceVisibilityElement
             onNext={(visibility) =>
               Funnel.goNextWithData('description', { visibility })
             }
-            initialValue={Funnel.form.visibility}
           />
-        </Funnel.Step>
-        <Funnel.Step name="description">
+        </Activity>
+        <Activity
+          mode={Funnel.funnelStep === 'description' ? 'visible' : 'hidden'}
+        >
           <SpaceDescriptionElement
             onNext={(description) =>
               Funnel.goNextWithData('detail', { description })
             }
-            initialValue={Funnel.form.description}
           />
-        </Funnel.Step>
-        <Funnel.Step name="detail">
+        </Activity>
+        <Activity mode={Funnel.funnelStep === 'detail' ? 'visible' : 'hidden'}>
           <SpaceDetailElement
             onNext={(detail) => Funnel.goNextWithData('check', { ...detail })}
-            initialValue={{
-              profileImage: Funnel.form.profileImage,
-              email: Funnel.form.email,
-              instagram: Funnel.form.instagram,
-            }}
           />
-        </Funnel.Step>
-        <Funnel.Step name="check">
+        </Activity>
+        <Activity mode={Funnel.funnelStep === 'check' ? 'visible' : 'hidden'}>
           <SpaceCheckElement createFunnelForm={Funnel.form} onNext={() => {}} />
-        </Funnel.Step>
+        </Activity>
       </S.ContentContainer>
     </S.Wrapper>
   );
